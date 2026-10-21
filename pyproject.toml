@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "benchfair"
+version = "1.0.0"
+description = "Fair 2v2 rotations for pickup sports and game nights."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+]
+
+[project.scripts]
+benchfair = "benchfair.cli:main"
+
+[project.urls]
+Repository = "https://github.com/SavelMoshi/benchfair"
+
+[tool.setuptools]
+packages = ["benchfair"]

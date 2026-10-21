@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "session": {
+    "players": [
+      "Alex",
+      "Blair",
+      "Casey",
+      "Devon",
+      "Ellis",
+      "Finley",
+      "Gray",
+      "Harper",
+      "Indigo",
+      "Jules"
+    ],
+    "courts": 2,
+    "rounds": 8,
+    "seed": 42
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Indigo",
+            "Casey"
+          ],
+          "team_b": [
+            "Finley",
+            "Devon"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Gray",
+            "Ellis"
+          ],
+          "team_b": [
+            "Harper",
+            "Jules"
+          ]
+        }
+      ],
+      "resting": [
+        "Alex",
+        "Blair"
+      ]
+    },
+    {
+      "round": 2,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Finley",
+            "Ellis"
+          ],
+          "team_b": [
+            "Alex",
+            "Blair"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Devon",
+            "Indigo"
+          ],
+          "team_b": [
+            "Gray",
+            "Harper"
+          ]
+        }
+      ],
+      "resting": [
+        "Casey",
+        "Jules"
+      ]
+    },
+    {
+      "round": 3,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Jules",
+            "Alex"
+          ],
+          "team_b": [
+            "Harper",
+            "Indigo"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Casey",
+            "Devon"
+          ],
+          "team_b": [
+            "Blair",
+            "Ellis"
+          ]
+        }
+      ],
+      "resting": [
+        "Finley",
+        "Gray"
+      ]
+    },
+    {
+      "round": 4,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Jules",
+            "Devon"
+          ],
+          "team_b": [
+            "Finley",
+            "Alex"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Indigo",
+            "Gray"
+          ],
+          "team_b": [
+            "Casey",
+            "Blair"
+          ]
+        }
+      ],
+      "resting": [
+        "Ellis",
+        "Harper"
+      ]
+    },
+    {
+      "round": 5,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Blair",
+            "Gray"
+          ],
+          "team_b": [
+            "Harper",
+            "Alex"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Casey",
+            "Finley"
+          ],
+          "team_b": [
+            "Ellis",
+            "Jules"
+          ]
+        }
+      ],
+      "resting": [
+        "Devon",
+        "Indigo"
+      ]
+    },
+    {
+      "round": 6,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Devon",
+            "Alex"
+          ],
+          "team_b": [
+            "Jules",
+            "Indigo"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Harper",
+            "Blair"
+          ],
+          "team_b": [
+            "Casey",
+            "Gray"
+          ]
+        }
+      ],
+      "resting": [
+        "Ellis",
+        "Finley"
+      ]
+    },
+    {
+      "round": 7,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Alex",
+            "Indigo"
+          ],
+          "team_b": [
+            "Ellis",
+            "Harper"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Devon",
+            "Gray"
+          ],
+          "team_b": [
+            "Blair",
+            "Finley"
+          ]
+        }
+      ],
+      "resting": [
+        "Casey",
+        "Jules"
+      ]
+    },
+    {
+      "round": 8,
+      "matches": [
+        {
+          "court": 1,
+          "team_a": [
+            "Blair",
+            "Devon"
+          ],
+          "team_b": [
+            "Jules",
+            "Casey"
+          ]
+        },
+        {
+          "court": 2,
+          "team_a": [
+            "Alex",
+            "Ellis"
+          ],
+          "team_b": [
+            "Finley",
+            "Gray"
+          ]
+        }
+      ],
+      "resting": [
+        "Harper",
+        "Indigo"
+      ]
+    }
+  ],
+  "fairness": {
+    "players": [
+      {
+        "name": "Alex",
+        "games_played": 7,
+        "rounds_rested": 1,
+        "distinct_teammates": 7,
+        "distinct_opponents": 8,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Blair",
+        "games_played": 7,
+        "rounds_rested": 1,
+        "distinct_teammates": 7,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Casey",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 8,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Devon",
+        "games_played": 7,
+        "rounds_rested": 1,
+        "distinct_teammates": 7,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Ellis",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Finley",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 8,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Gray",
+        "games_played": 7,
+        "rounds_rested": 1,
+        "distinct_teammates": 7,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Harper",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 8,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Indigo",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      },
+      {
+        "name": "Jules",
+        "games_played": 6,
+        "rounds_rested": 2,
+        "distinct_teammates": 6,
+        "distinct_opponents": 9,
+        "longest_resting_streak": 1
+      }
+    ],
+    "min_games_played": 6,
+    "max_games_played": 7,
+    "game_count_difference": 1,
+    "repeated_teammate_pairings": 0,
+    "repeated_opponent_pairings": 21
+  }
+}
