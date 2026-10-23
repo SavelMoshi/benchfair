@@ -2,12 +2,10 @@
 
 [![Tests](https://github.com/SavelMoshi/benchfair/actions/workflows/tests.yml/badge.svg)](https://github.com/SavelMoshi/benchfair/actions/workflows/tests.yml)
 
-**Reproducible 2v2 rotations for pickup sports and game nights.**
-
-When friends organize doubles games, a few people can end up playing repeatedly
-while others wait. BenchFair chooses who plays next, forms teams that discourage
-repeated pairings, and shows exactly how playing time and pair variety turned out.
-A **court** can mean a sports court or a gaming station.
+BenchFair makes 2v2 schedules for casual sports and game nights. It gives the
+next spots to players with fewer games, uses waiting time to break ties, and
+tries to avoid repeating teammates and opponents. A **court** can also mean a
+gaming station.
 
 ## Example
 
@@ -21,9 +19,8 @@ This is round 1 of the [generated sample schedule](examples/schedule.md), using
 
 Resting: Alex, Blair
 
-Across that complete sample, each player plays six or seven games. There are
-zero repeated teammate pairings and 21 repeated opponent pairings. These are
-results for this particular input, not promises for every session.
+Across the complete sample, each player plays six or seven games. It has zero
+repeated teammate pairings and 21 repeated opponent pairings.
 
 ## Features
 
@@ -33,8 +30,8 @@ results for this particular input, not promises for every session.
 - Among players with equal game counts, longer current rest streaks come first.
 - A bounded search prefers teammate variety, then opponent variety.
 - Markdown and versioned JSON reports, with a fixed default seed of **42**.
-- Standard-library runtime and tests; reusable Python functions and an optional
-  installed command.
+- No runtime dependencies; callable Python functions and an optional installed
+  command.
 
 ## Requirements and quick start
 
@@ -62,8 +59,8 @@ benchfair examples/players.json --courts 2 --rounds 8 --seed 42
 ```
 
 On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1` instead.
-Installation uses setuptools as a build dependency and may need network access;
-running the module and tests from the checkout does not.
+The package installation uses setuptools; running from the checkout does not
+need an installation step.
 
 ## Roster format
 
@@ -76,17 +73,12 @@ Save a UTF-8 JSON file with a `players` list. For example:
 ```
 
 The complete [sample roster](examples/players.json) uses **fictional names**.
-Names must be nonempty strings with at most **40 Unicode code points after
-trimming outer whitespace**. Duplicate names are rejected after trimming and
-Unicode case-folding (`Alex` and ` alex ` collide). Unicode normalization is
-not performed; use consistent spelling. Ordinary Unicode names, including
-non-Latin scripts and emoji, are supported.
-
-Control characters, line/paragraph separators, unpaired surrogates, and explicit
-bidirectional formatting controls are rejected before trimming. This prevents
-names from introducing new lines or misleading directional overrides in reports.
-Names are escaped in Markdown and preserved as strings in JSON. Extra top-level
-roster fields are ignored.
+Names can use Unicode and are limited to **40 code points after trimming outer
+whitespace**. They cannot be blank or duplicate another name after case-folding
+(`Alex` and ` alex ` collide). BenchFair rejects control characters, line breaks,
+unpaired surrogates, and bidirectional formatting controls. It escapes names in
+Markdown and preserves them in JSON. Unicode normalization is not performed, so
+use consistent spelling. Extra top-level roster fields are ignored.
 
 ## CLI options
 
@@ -134,13 +126,11 @@ print(report.game_count_difference)
 print(render_markdown(schedule))
 ```
 
-`generate_schedule` accepts a sequence of names, validates the same constraints
-as the CLI, and raises `ValueError` for invalid inputs. It returns immutable
-`Schedule`, `Round`, and `Match` records, does not modify the roster, and does not
-alter global random state. `calculate_report`, `render_markdown`, and
-`render_json` work on the completed schedule; reporting also checks round
-membership and court/team sizes. Manually constructed records should follow the
-annotated tuple-based structure in `benchfair/models.py`.
+`generate_schedule` applies the CLI's validation to direct Python calls and
+raises `ValueError` for invalid inputs. It returns immutable `Schedule`, `Round`,
+and `Match` records without changing the input roster or global random state.
+`calculate_report` checks the completed schedule and recounts its statistics;
+the render functions use that report.
 
 ## How scheduling works
 
@@ -158,11 +148,10 @@ annotated tuple-based structure in `benchfair/models.py`.
 4. **Update history** and proceed to the next round. After scheduling, calculate
    the report afresh from the matches.
 
-The same ordered roster, options, seed, and algorithm version reproduce a
-schedule on the tested Python versions. Reordering the roster or changing the
-algorithm/search budget can change the result. Different seeds may produce
-the same schedule. See [design notes](docs/design.md) for the balance argument,
-complexity, and interview discussion points.
+The same ordered roster, options, and seed reproduce a schedule with this
+version of the algorithm. Reordering names or changing the algorithm can change
+the result. See the [design notes](docs/design.md) for the balance argument and
+complexity.
 
 ## Fairness metrics
 
@@ -189,36 +178,23 @@ from the squared-count cost used during search.
 python -m unittest discover -s tests -v
 ```
 
-The suite uses `unittest` and subtests across roster sizes, courts, rounds, and
-seeds. It checks round membership, court shape, selection priorities, per-round
-balance, odd rosters, smallest and largest sessions, reproducibility across hash
-seeds, state isolation, global RNG preservation, validation, CLI exits, JSON, and
-Markdown escaping. Hand-built schedules verify statistics, and known pair
-histories verify scoring independently of search outcomes.
+The `unittest` suite checks round membership, playing-time balance, selection
+priorities, reproducibility, validation, CLI behavior, and both output formats.
+Hand-built schedules check the statistics and pair scoring against known answers.
 
-GitHub Actions runs the suite, regenerates and compares both checked-in samples,
-and installs the package to verify the console command. The workflow has only
-`contents: read` permissions. Action major versions were checked against the
-official [checkout](https://github.com/actions/checkout) and
-[setup-python](https://github.com/actions/setup-python) documentation.
+GitHub Actions runs the tests on Python 3.11–3.15, checks that both examples
+regenerate unchanged, and tries the installed command.
 
 ## Limits and tradeoffs
 
-Playing-time balance is a specific guarantee for this fixed-roster model.
-Teammate/opponent variety is heuristic: the search does not enumerate all
-arrangements or guarantee a global optimum. Repeats are unavoidable in some
-sessions. Equal playing time says nothing about skill, match difficulty, or game
-duration. Rest streaks break game-count ties; there is no separate optimal
-maximum-wait guarantee. Court assignment itself is not balanced.
+The one-game maximum difference depends on a fixed roster with every player
+available for every round. Pair variety is a heuristic, so repeats can happen
+and the schedule may not be globally optimal. BenchFair does not account for
+skill, match difficulty, game length, or court preference. It cannot handle
+players joining or leaving mid-session.
 
-Version one has no ratings, arrivals/departures, results, brackets, accounts,
-database, web interface, cloud services, or AI APIs. It schedules complete
-sessions before play begins.
-
-Plausible future improvements include optional skill-aware scoring, explicit
-availability per round, court-assignment balance, and a small exhaustive-search
-reference solver to compare heuristic results on tiny sessions. Each would need
-new tests and clear definitions of which fairness goals take priority.
+Possible next steps are skill-aware scoring, per-round availability, and court
+assignment balance. Each would need a clear fairness rule before implementation.
 
 ## License
 

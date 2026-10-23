@@ -61,7 +61,4 @@ The remaining fields of `fairness` are nonnegative integers:
   pair appearing `k` times, add `max(0, k − 1)`. Each match has two teammate pairs
   and four opponent pairs; do not count a pair twice from both perspectives.
 
-Seeds are Python integers. Consumers with limited integer precision (such as
-JavaScript numbers) should use seeds within their exact integer range or parse
-large integers with an appropriate library. The CLI itself does not narrow seeds
-to a JavaScript-specific range.
+Seeds are Python integers; the CLI does not impose a smaller numeric range.

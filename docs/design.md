@@ -49,9 +49,9 @@ counts still matter: another use of a heavily repeated pair costs more than a
 second use of a pair seen once. Pairs occur at most once in a valid candidate
 because selected players are disjoint across courts.
 
-The report's repeat count, `max(0, k − 1)`, is deliberately a more interpretable
-measure than the search cost. A lower squared-count cost is an objective for
-this round, not a guarantee of the fewest reported repeats over the session.
+The report uses the simpler count `max(0, k − 1)` for each pair. It measures actual
+repeats in the finished schedule; the squared-count cost only ranks candidates
+during scheduling.
 
 ## Bounded search
 
@@ -61,10 +61,9 @@ the lowest score, retaining the first candidate on ties. Duplicate candidates
 are allowed; there is no unbounded retry or rejection loop.
 
 Exhaustive search grows quickly even though court order and team order produce
-equivalent arrangements. A fixed candidate budget keeps the implementation
-small and work predictable across the supported limits. More candidates may
-improve a round's score but also take more time and can change future history.
-The constant is an explicit design choice, not a benchmark-derived optimum.
+equivalent arrangements. A fixed candidate budget makes the work predictable.
+More candidates could improve one round's score, but would take longer and
+could change later rounds.
 
 ## Rough complexity
 
@@ -82,8 +81,6 @@ names as constant-sized keys and hash lookups as average constant time.
   pair-history scan. Report history is `O(N²)` space. Resting names are converted
   to a set for constant-time membership checks; roster order controls display.
 
-No performance numbers or real-world adoption claims are implied by these bounds.
-
 ## Independent reporting and tests
 
 The report sees only a finished schedule. It does not read the scheduler's
@@ -99,9 +96,8 @@ tests cover exact known pair costs, manually counted statistics, input failures,
 Unicode, Markdown/JSON output, process exit codes, reproducibility, and isolation.
 CI also checks generated samples and package installation on Python 3.11–3.15.
 
-These tests establish the checked cases, not global optimality of the heuristic.
-They do not assume every seed gives a unique result or that the heuristic beats
-every random schedule. The balance argument above explains the wider property.
+The tests do not establish that pairings are globally optimal. The balance
+argument above explains why the game-count limit applies beyond the tested cases.
 
 ## Possible extensions
 
